@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	tools:context=".PostActivity">
+
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/output"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:scrollbars="vertical" />
+
+	<com.google.android.material.textfield.TextInputLayout
+		android:id="@+id/inputLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:endIconDrawable="@drawable/ic_done"
+		app:endIconMode="custom">
+
+		<com.google.android.material.textfield.TextInputEditText
+			android:id="@+id/input"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+	</com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

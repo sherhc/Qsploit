@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+	<color name="colorSurface">#121212</color>
+	<color name="colorOnSurface">#FFFFFF</color>
+	<color name="iconOnSurface">#99FFFFFF</color>
+
+	<color name="colorPrimarySurface">#121212</color>
+	<color name="colorOnPrimarySurface">#99FFFFFF</color>
+
+	<color name="primaryColor">#1EB980</color>
+	<color name="colorOnPrimary">#000000</color>
+	<color name="colorPrimaryDark">#383838</color>
+
+	<color name="secondaryColor">#b91e57</color>
+	<color name="colorOnSecondary">#FFFFFF</color>
+	<bool name="isLight">false</bool>
+</resources>

@@ -1,0 +1,27 @@
+<resources>
+
+	<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<item name="colorSurface">@color/colorSurface</item>
+		<item name="colorOnSurface">@color/colorOnSurface</item>
+
+		<item name="colorOnPrimarySurface">@color/colorOnPrimarySurface</item>
+		<item name="colorControlNormal">@color/iconOnSurface</item>
+		<item name="colorPrimary">@color/primaryColor</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorOnPrimary">@color/colorOnPrimary</item>
+
+		<item name="colorSecondary">@color/secondaryColor</item>
+		<item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+		<item name="android:windowLightStatusBar">@bool/isLight</item>
+		<item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+		<item name="bottomAppBarStyle">
+			@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface
+		</item>
+	</style>
+
+	<style name="Splashscreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<item name="android:windowSplashscreenContent">@drawable/splashscreen</item>
+		<item name="android:windowFullscreen">true</item>
+	</style>
+</resources>

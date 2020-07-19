@@ -1,0 +1,17 @@
+<resources>
+	<color name="colorSurface">#FFFFFF</color>
+	<color name="colorOnSurface">#000000</color>
+	<color name="iconOnSurface">#FFFFFF</color>
+
+	<color name="colorPrimarySurface">#3377FF</color>
+	<color name="colorOnPrimarySurface">#FFFFFF</color>
+
+	<color name="primaryColor">#3377FF</color>
+	<color name="colorOnPrimary">#FFFFFF</color>
+	<color name="colorPrimaryDark">#004ccb</color>
+
+	<color name="secondaryColor">#ffbb33</color>
+	<color name="colorOnSecondary">#000000</color>
+
+	<bool name="isLight">false</bool>
+</resources>
