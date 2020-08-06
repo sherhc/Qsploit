@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+
+		<variable
+			name="viewModel"
+			type="animus.sherhc.qsploit.pre.PreViewModel" />
+	</data>
+
+	<com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/preList"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			app:list="@{viewModel.networkLiveData}"
+			tools:listitem="@layout/item_network" />
+
+		<com.google.android.material.floatingactionbutton.FloatingActionButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|end"
+			android:layout_margin="16dp"
+			android:src="@android:drawable/ic_input_add" />
+	</com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
+</layout>

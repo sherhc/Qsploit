@@ -13,5 +13,5 @@
 	<color name="secondaryColor">#ffbb33</color>
 	<color name="colorOnSecondary">#000000</color>
 
-	<bool name="isLight">false</bool>
+	<bool name="isLight">true</bool>
 </resources>
