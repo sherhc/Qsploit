@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/preDrawer"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:layout_height="match_parent">
 
-	<com.google.android.material.appbar.MaterialToolbar
-		android:id="@+id/preBar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:elevation="4dp" />
+	<com.google.android.material.navigation.NavigationView
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		app:headerLayout="@layout/header_pre"
+		app:menu="@menu/menu_pre" />
 
-	<fragment
-		android:id="@+id/preContainer"
-		android:name="androidx.navigation.fragment.NavHostFragment"
+	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		app:defaultNavHost="true"
-		app:navGraph="@navigation/navigation_pre"
-		tools:layout="@layout/fragment_network" />
+		android:orientation="vertical">
 
-</LinearLayout>
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/preBar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:elevation="4dp" />
+
+		<fragment
+			android:id="@+id/preContainer"
+			android:name="androidx.navigation.fragment.NavHostFragment"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			app:defaultNavHost="true"
+			app:navGraph="@navigation/navigation_pre"
+			tools:layout="@layout/fragment_network" />
+
+	</LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

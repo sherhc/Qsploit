@@ -1,6 +1,6 @@
 package animus.sherhc.qsploit.post
 
-import animus.sherhc.qsploit.SingletonHolder
+import animus.sherhc.qsploit.base.SingletonHolder
 import okhttp3.*
 import okio.ByteString
 import java.util.concurrent.TimeUnit

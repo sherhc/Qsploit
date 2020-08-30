@@ -1,4 +1,4 @@
-package animus.sherhc.qsploit
+package animus.sherhc.qsploit.base
 
 open class SingletonHolder<out T, in A>(creator: ((A) -> T)) {
 	private var _creator: ((A) -> T)? = creator

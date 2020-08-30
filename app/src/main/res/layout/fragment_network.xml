@@ -27,6 +27,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom|end"
 			android:layout_margin="16dp"
+			android:onClick="@{viewModel::moveToPost}"
 			android:src="@android:drawable/ic_input_add" />
 	</com.google.android.material.circularreveal.coordinatorlayout.CircularRevealCoordinatorLayout>
 </layout>

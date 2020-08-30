@@ -9,5 +9,22 @@
 		android:id="@+id/networkFragment"
 		android:name="animus.sherhc.qsploit.pre.NetworkFragment"
 		android:label="可用连接"
-		tools:layout="@layout/fragment_network" />
+		tools:layout="@layout/fragment_network">
+		<action
+			android:id="@+id/scan"
+			app:destination="@id/localFragment" />
+		<action
+			android:id="@+id/preToPost"
+			app:destination="@id/postActivity" />
+	</fragment>
+	<fragment
+		android:id="@+id/localFragment"
+		android:name="animus.sherhc.qsploit.pre.LocalFragment"
+		android:label="LocalFragment"
+		tools:layout="@layout/fragment_local" />
+	<activity
+		android:id="@+id/postActivity"
+		android:name="animus.sherhc.qsploit.post.PostActivity"
+		android:label="activity_post"
+		tools:layout="@layout/activity_post" />
 </navigation>

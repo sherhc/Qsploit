@@ -1,0 +1,47 @@
+buildscript {
+	ext{
+		okhttpVersion = "4.8.1"
+		ktorVersion = "1.4.0"
+	}
+}
+plugins {
+	id 'com.android.library'
+	id 'kotlin-android'
+}
+android {
+	compileSdkVersion(30)
+	buildToolsVersion("30.0.2")
+
+	defaultConfig {
+		minSdkVersion(28)
+		targetSdkVersion(30)
+		versionCode = 1
+		versionName = "1.0"
+	}
+
+	buildTypes {
+		/*getByName("release") {
+			isMinifyEnabled = false
+			proguardFiles(
+				getDefaultProguardFile("proguard-android-optimize.txt"),
+				"proguard-rules.pro"
+			)
+		}*/
+		release {
+			minifyEnabled false
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+		}
+	}
+}
+
+dependencies {
+	//web
+
+	api("com.squareup.okhttp3:okhttp:${okhttpVersion}")
+	testImplementation("com.squareup.okhttp3:mockwebserver:${okhttpVersion}")
+
+	api("io.ktor:ktor-client-websockets:$ktorVersion")
+	api("io.ktor:ktor-server-netty:$ktorVersion")
+	api("io.ktor:ktor-websockets:$ktorVersion")
+	testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
+}

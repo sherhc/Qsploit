@@ -7,4 +7,6 @@ interface IItem {
 	fun getLayout(): Int
 
 	fun getVariableId(): Int
+
+	fun getProxy(): Int
 }

@@ -8,9 +8,14 @@
 		<variable
 			name="item"
 			type="animus.sherhc.qsploit.pre.NetworkModel" />
+
+		<variable
+			name="proxy"
+			type="animus.sherhc.qsploit.pre.ClickProxy" />
 	</data>
 
 	<com.google.android.material.circularreveal.cardview.CircularRevealCardView
+		android:id="@+id/netView"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="8dp"
@@ -27,8 +32,8 @@
 				android:layout_width="72dp"
 				android:layout_height="72dp"
 				android:adjustViewBounds="true"
+				android:onClick="@{proxy.click3}"
 				android:padding="16dp"
-				android:scaleType="centerInside"
 				app:imageResource="@{item.type}"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
@@ -37,28 +42,28 @@
 			<com.google.android.material.textview.MaterialTextView
 				android:id="@+id/net_interface"
 				style="@style/TextAppearance.MaterialComponents.Headline6"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
 				android:layout_marginStart="72dp"
-				android:firstBaselineToTopHeight="34dp"
+				android:firstBaselineToTopHeight="28dp"
+				android:onClick="@{(view)->proxy.click1(view,item)}"
 				android:singleLine="true"
 				android:text="@{item.interfaceName}"
-				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toTopOf="parent"
 				tools:text="wlan" />
 
-			<com.google.android.material.textview.MaterialTextView
+			<com.google.android.material.circularreveal.CircularRevealLinearLayout
 				android:id="@+id/net_linkAddresses"
-				style="@style/TextAppearance.MaterialComponents.Subtitle2"
-				android:layout_width="0dp"
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="72dp"
-				android:firstBaselineToTopHeight="56dp"
-				android:text="@{item.linkAddresses}"
-				app:layout_constraintEnd_toEndOf="parent"
+				android:firstBaselineToTopHeight="20dp"
+				android:orientation="vertical"
+				app:layout_constraintBottom_toBottomOf="@id/net_type"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/net_interface"
+				app:list="@{item.linkAddresses}"
 				tools:text="192.168.1.2" />
 
 			<com.google.android.material.textview.MaterialTextView
@@ -88,32 +93,33 @@
 				app:layout_constraintStart_toEndOf="@id/label_gateway"
 				app:layout_constraintTop_toBottomOf="@id/net_linkAddresses" />
 
-			<com.google.android.material.textview.MaterialTextView
+
+			<com.google.android.material.circularreveal.CircularRevealLinearLayout
 				android:id="@+id/net_gateway"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:autoSizeTextType="uniform"
-				android:text="@{item.gateway}"
+				android:orientation="vertical"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toStartOf="@id/net_dns"
 				app:layout_constraintHorizontal_bias="0.5"
 				app:layout_constraintStart_toStartOf="parent"
 				app:layout_constraintTop_toBottomOf="@id/label_gateway"
-				tools:text="192.168.1.1" />
+				app:list="@{item.gateway}" />
 
 
-			<com.google.android.material.textview.MaterialTextView
+			<com.google.android.material.circularreveal.CircularRevealLinearLayout
 				android:id="@+id/net_dns"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:autoSizeTextType="uniform"
-				android:text="@{item.dns}"
+				android:orientation="vertical"
 				app:layout_constraintBottom_toBottomOf="parent"
 				app:layout_constraintEnd_toEndOf="parent"
 				app:layout_constraintHorizontal_bias="0.5"
 				app:layout_constraintStart_toEndOf="@id/net_gateway"
 				app:layout_constraintTop_toBottomOf="@id/label_dns"
-				tools:text="1.1.1.1\n8.8.8.8" />
+				app:list="@{item.dns}" />
+
+
 		</androidx.constraintlayout.widget.ConstraintLayout>
 
 	</com.google.android.material.circularreveal.cardview.CircularRevealCardView>

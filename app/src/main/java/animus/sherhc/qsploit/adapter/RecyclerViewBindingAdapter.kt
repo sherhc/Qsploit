@@ -20,11 +20,11 @@ object RecyclerViewBindingAdapter {
 
 	@JvmStatic
 	@BindingAdapter(value = ["decoration"])
-	fun bindItemDecoration(recyclerView: RecyclerView, bind: Boolean) {
+	fun RecyclerView.bindItemDecoration(bind: Boolean) {
 		if (bind)
-			recyclerView.addItemDecoration(
+			addItemDecoration(
 				DividerItemDecoration(
-					recyclerView.context,
+					context,
 					LinearLayoutManager.VERTICAL
 				)
 			)

@@ -2,26 +2,22 @@ package animus.sherhc.qsploit.pre
 
 import android.net.LinkProperties
 import android.net.NetworkCapabilities
-import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.navigation.findNavController
 import animus.sherhc.qsploit.BR
 import animus.sherhc.qsploit.R
 import animus.sherhc.qsploit.base.IItem
-import java.net.Inet4Address
 
 data class NetworkModel(
 	val link: LinkProperties, val capability: NetworkCapabilities
 ) : IItem {
 	override fun getLayout() = R.layout.item_network
 	override fun getVariableId() = BR.item
+	override fun getProxy() = BR.proxy
 
 	val interfaceName = link.interfaceName
-	val linkAddresses: String = link.linkAddresses.first { it.address is Inet4Address }
-		.address.hostAddress
-	val dns = link.dnsServers.joinToString("\n", transform =
-	{ it.hostAddress })
-	val gateway = link.routes.first { it.isDefaultRoute }.gateway?.hostAddress ?: ""
+	val linkAddresses = link.linkAddresses.map { it.address.hostAddress }
+	val dns = link.dnsServers.map { it.hostAddress }
+	val gateway = link.routes.map { it.gateway?.hostAddress }.toSet().toList()
 
 	@LayoutRes
 	val type = when {
@@ -29,10 +25,9 @@ data class NetworkModel(
 		capability.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> R.drawable.pre_cellular
 		capability.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> R.drawable.pre_wifi
 		capability.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> R.drawable.pre_btnet
+		capability.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> R.drawable.pre_ethernet
+		capability.hasTransport(NetworkCapabilities.TRANSPORT_WIFI_AWARE) -> R.drawable.pre_wifi
 		else -> R.drawable.pre_net
 	}
-
-	fun onClick(v: View) {
-		v.findNavController()
-	}
 }
+
