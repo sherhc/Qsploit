@@ -7,6 +7,9 @@ import io.ktor.routing.*
 import io.ktor.server.testing.*
 import io.ktor.websocket.*
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
+import okhttp3.WebSocketListener
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
@@ -17,6 +20,15 @@ import org.junit.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class MyAppTest {
+	@Test
+
+	fun a() {
+		val mockWebServer = MockWebServer();
+		mockWebServer.enqueue(MockResponse().withWebSocketUpgrade(object : WebSocketListener() {
+
+		}))
+	}
+
 	@Test
 	fun testRequests() = withTestApplication(Application::main) {
 		with(handleRequest(HttpMethod.Get, "/")) {

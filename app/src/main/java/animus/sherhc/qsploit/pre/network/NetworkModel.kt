@@ -1,18 +1,13 @@
-package animus.sherhc.qsploit.pre
+package animus.sherhc.qsploit.pre.network
 
 import android.net.LinkProperties
 import android.net.NetworkCapabilities
 import androidx.annotation.LayoutRes
-import animus.sherhc.qsploit.BR
 import animus.sherhc.qsploit.R
-import animus.sherhc.qsploit.base.IItem
 
 data class NetworkModel(
 	val link: LinkProperties, val capability: NetworkCapabilities
-) : IItem {
-	override fun getLayout() = R.layout.item_network
-	override fun getVariableId() = BR.item
-	override fun getProxy() = BR.proxy
+) {
 
 	val interfaceName = link.interfaceName
 	val linkAddresses = link.linkAddresses.map { it.address.hostAddress }

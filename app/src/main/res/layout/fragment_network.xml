@@ -19,7 +19,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-			app:list="@{viewModel.networkLiveData}"
 			tools:listitem="@layout/item_network" />
 
 		<com.google.android.material.floatingactionbutton.FloatingActionButton

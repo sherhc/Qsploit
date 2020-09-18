@@ -2,7 +2,7 @@ buildscript {
     ext {
         lifecycleVersion = "2.2.0"
         navVersion = "2.3.0"
-        composeVersion = "1.0.0-alpha01"
+        composeVersion = '1.0.0-alpha02'
     }
 }
 

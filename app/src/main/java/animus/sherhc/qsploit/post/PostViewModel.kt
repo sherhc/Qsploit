@@ -4,12 +4,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import animus.sherhc.webSocket.WsServerManager
+import animus.sherhc.webSocket.WebSocketServer
+import io.ktor.http.cio.websocket.*
+import io.ktor.websocket.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.*
 import java.util.concurrent.TimeUnit
+import animus.sherhc.webSocket.WebSocketListener as Listener
 
 class PostViewModel : ViewModel() {
 	private val okHttpClient = OkHttpClient.Builder()
@@ -18,12 +21,20 @@ class PostViewModel : ViewModel() {
 		.writeTimeout(3, TimeUnit.SECONDS)
 		.build()
 	var ws: WebSocket? = null
+	var server: WebSocketServer? = null
 	val message = MutableLiveData<String>()
 
 	init {
 		viewModelScope.launch(Dispatchers.Default) {
 			try {
-				WsServerManager.manager.connect()
+				server = WebSocketServer(object : Listener<WebSocketServerSession>() {
+					override fun onMessage(session: WebSocketServerSession, frame: Frame) {
+						if (frame is Frame.Text) {
+							message.postValue(frame.readText())
+						}
+					}
+				})
+				server?.start()
 			} catch (e: Exception) {
 				Log.e(this@PostViewModel.javaClass.simpleName, "$e")
 			}
@@ -54,8 +65,8 @@ class PostViewModel : ViewModel() {
 
 	override fun onCleared() {
 		super.onCleared()
+		//WsServerManager.manager.close()
 		okHttpClient.dispatcher.executorService.shutdown()
-		WsServerManager.manager.disconnect()
 		ws?.close(1000, "客户端关闭")
 	}
 }

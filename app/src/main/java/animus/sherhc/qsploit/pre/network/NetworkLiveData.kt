@@ -1,4 +1,4 @@
-package animus.sherhc.qsploit.pre
+package animus.sherhc.qsploit.pre.network
 
 import android.net.*
 import androidx.core.content.getSystemService

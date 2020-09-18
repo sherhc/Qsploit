@@ -7,7 +7,7 @@
 
 	<fragment
 		android:id="@+id/networkFragment"
-		android:name="animus.sherhc.qsploit.pre.NetworkFragment"
+		android:name="animus.sherhc.qsploit.pre.network.NetworkFragment"
 		android:label="可用连接"
 		tools:layout="@layout/fragment_network">
 		<action
@@ -19,7 +19,7 @@
 	</fragment>
 	<fragment
 		android:id="@+id/localFragment"
-		android:name="animus.sherhc.qsploit.pre.LocalFragment"
+		android:name="animus.sherhc.qsploit.pre.local.LocalFragment"
 		android:label="LocalFragment"
 		tools:layout="@layout/fragment_local" />
 	<activity

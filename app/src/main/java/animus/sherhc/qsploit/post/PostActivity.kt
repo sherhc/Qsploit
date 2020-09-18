@@ -7,6 +7,7 @@ import animus.sherhc.qsploit.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.runBlocking
 
 class PostActivity : AppCompatActivity(R.layout.activity_post) {
 	private val viewModel by viewModels<PostViewModel>()
@@ -15,12 +16,14 @@ class PostActivity : AppCompatActivity(R.layout.activity_post) {
 		val outText = findViewById<MaterialTextView>(R.id.outText)
 		val inputLayout = findViewById<TextInputLayout>(R.id.inputLayout)
 		val inputText = findViewById<TextInputEditText>(R.id.inputText)
-		viewModel.message.observe(this, { outText.append("server: $it\n") })
+		viewModel.message.observe(this, { outText.append("client: $it\n") })
 		inputLayout.setEndIconOnClickListener {
-			viewModel.ws?.send("${inputText.text}")
-			outText.append("client: ${inputText.text}\n")
+			runBlocking {
+				viewModel.server?.send("${inputText.text}")
+				outText.append("server: ${inputText.text}\n")
+			}
 		}
-		//viewModel.connectWebSocket("ws://192.168.223.11:8876")
-		viewModel.connectWebSocket("ws://0.0.0.0:8080")
+		//viewModel.connectWebSocket("ws://192.168.223.11:8876/aardio")
+		//viewModel.connectWebSocket("ws://0.0.0.0:8080")
 	}
 }
