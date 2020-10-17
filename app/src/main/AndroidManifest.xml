@@ -4,6 +4,8 @@
 	package="animus.sherhc.qsploit">
 
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
 	<application
 		android:name=".App"
 		android:icon="@mipmap/ic_launcher"
@@ -12,6 +14,11 @@
 		android:theme="@style/AppTheme"
 		android:usesCleartextTraffic="true"
 		tools:ignore="AllowBackup">
+		<service
+			android:name=".post.WebSocketService"
+			android:enabled="true"
+			android:exported="false" />
+
 		<activity
 			android:name=".pre.PreActivity"
 			android:theme="@style/Splashscreen">

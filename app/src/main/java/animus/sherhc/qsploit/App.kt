@@ -7,7 +7,6 @@ class App : Application() {
 	companion object {
 		lateinit var app: App
 			private set
-
 	}
 
 	override fun onCreate() {

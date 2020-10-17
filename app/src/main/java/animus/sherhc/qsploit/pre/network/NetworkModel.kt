@@ -1,20 +1,21 @@
 package animus.sherhc.qsploit.pre.network
 
+import android.net.LinkAddress
 import android.net.LinkProperties
 import android.net.NetworkCapabilities
-import androidx.annotation.LayoutRes
+import androidx.annotation.DrawableRes
 import animus.sherhc.qsploit.R
 
 data class NetworkModel(
 	val link: LinkProperties, val capability: NetworkCapabilities
 ) {
-
 	val interfaceName = link.interfaceName
-	val linkAddresses = link.linkAddresses.map { it.address.hostAddress }
+	val linkAddresses: List<LinkAddress> = link.linkAddresses
+
 	val dns = link.dnsServers.map { it.hostAddress }
 	val gateway = link.routes.map { it.gateway?.hostAddress }.toSet().toList()
 
-	@LayoutRes
+	@DrawableRes
 	val type = when {
 		capability.hasTransport(NetworkCapabilities.TRANSPORT_VPN) -> R.drawable.pre_vpn
 		capability.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> R.drawable.pre_cellular

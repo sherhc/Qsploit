@@ -16,9 +16,9 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
-class ScanDeviceTool {
+class LocalManager {
 	companion object {
-		private val tag = ScanDeviceTool::class.java.simpleName
+		private val tag = LocalManager::class.java.simpleName
 
 		/**
 		 * 核心池大小
@@ -29,8 +29,6 @@ class ScanDeviceTool {
 		 * 线程池最大线程数
 		 */
 		private const val MAX_NUM_POOL_SIZE = 255
-
-
 	}
 
 	private val mPing = "ping -c 1 -w 3 " // 其中 -c 1为发送的次数，-w 表示发送后等待响应的时间
@@ -58,7 +56,6 @@ class ScanDeviceTool {
 		if (mFlag) {
 			mIpList.clear()
 			mFlag = false
-			//mDevAddress = getLocAddress() // 获取本机IP地址
 			mLocAddress = getLocAddrIndex(mDevAddress) // 获取本地ip前缀
 			Log.e(tag, "开始扫描设备,本机Ip为：$mDevAddress")
 			if (TextUtils.isEmpty(mLocAddress)) {
@@ -84,12 +81,12 @@ class ScanDeviceTool {
 					val ping = (mPing + mLocAddress
 							+ i)
 					val currentIp = mLocAddress + i
-					if (mDevAddress.equals(currentIp)) // 如果与本机IP地址相同,跳过
+					if (mDevAddress == currentIp) // 如果与本机IP地址相同,跳过
 						return@Runnable
 					try {
 						mProcess = mRun.exec(ping)
 						val result = mProcess?.waitFor()
-						Log.e(tag, "正在扫描的IP地址为：" + currentIp + "返回值为：" + result)
+						Log.e(tag, "正在扫描的IP地址为：$currentIp,返回值为：$result")
 						if (result == 0) {
 							mIpList.add(currentIp)
 							Log.e(
@@ -98,9 +95,6 @@ class ScanDeviceTool {
 									currentIp
 								)
 							)
-						} else {
-							// 扫描失败
-							Log.e(tag, "扫描失败")
 						}
 					} catch (e: Exception) {
 						Log.e(tag, "扫描异常$e")
@@ -199,18 +193,18 @@ class ScanDeviceTool {
 	fun getHardwareAddress(ip: String?): String {
 		val MAC_RE = "^%s\\s+0x1\\s+0x2\\s+([:0-9a-fA-F]+)\\s+\\*\\s+\\w+$"
 		val BUF = 8 * 1024
-		var hw = "00:00:00:00:00:00"
+		var hw: String = "00:00:00:00:00:00"
 		try {
 			if (ip != null) {
 				val ptrn = String.format(MAC_RE, ip.replace(".", "\\."))
 				val pattern: Pattern = Pattern.compile(ptrn)
 				val bufferedReader = BufferedReader(FileReader("/proc/net/arp"), BUF)
-				var line: String?
+				var line: String
 				var matcher: Matcher
 				while (bufferedReader.readLine().also { line = it } != null) {
 					matcher = pattern.matcher(line)
 					if (matcher.matches()) {
-						hw = matcher.group(1)
+						hw = matcher.group(1) ?: "00:00:00:00:00:00"
 						break
 					}
 				}
@@ -219,8 +213,7 @@ class ScanDeviceTool {
 				Log.e(tag, "ip is null")
 			}
 		} catch (e: IOException) {
-			Log.e(tag, "Can't open/read file ARP: " + e.message)
-			return hw
+			throw Exception("Can't open/read file ARP")
 		}
 		return hw
 	}

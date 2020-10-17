@@ -1,5 +1,6 @@
 package animus.sherhc.webSocket
 
+import android.util.Log
 import io.ktor.application.*
 import io.ktor.http.cio.websocket.*
 import io.ktor.request.*
@@ -13,6 +14,7 @@ class KtorServer(private val listener: WebSocketListener<WebSocketServerSession>
 	ServerImpl<WebSocketServerSession>() {
 	private var engine: ApplicationEngine? = null
 	lateinit var currentSession: WebSocketServerSession
+
 	override fun start() {
 		val env = applicationEngineEnvironment {
 			module {
@@ -30,9 +32,10 @@ class KtorServer(private val listener: WebSocketListener<WebSocketServerSession>
 							}
 						} catch (e: ClosedReceiveChannelException) {
 							listener.onClose(this)
+							Log.e("onError", "${closeReason.await()}")
 						} catch (e: Exception) {
 							listener.onError(this, e)
-							//Log.e("onError", "${closeReason.await()}")
+							Log.e("onError", "${closeReason.await()}")
 						}
 					}
 				}

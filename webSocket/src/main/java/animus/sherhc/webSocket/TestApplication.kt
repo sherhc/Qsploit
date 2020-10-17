@@ -29,7 +29,6 @@ class TestApplication {
 					close(CloseReason(CloseReason.Codes.VIOLATED_POLICY, "No session"))
 					return@webSocket
 				}
-				this
 				//memberJoin(session.id, this)
 				try {
 					for (frame in incoming) {

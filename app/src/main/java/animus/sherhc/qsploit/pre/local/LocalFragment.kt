@@ -16,8 +16,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.fragment.app.Fragment
 import animus.sherhc.qsploit.theme.AppTheme
 
+
 class LocalFragment : Fragment() {
-	val tool = ScanDeviceTool()
+	val tool = LocalManager()
 	override fun onCreateView(
 		inflater: LayoutInflater,
 		container: ViewGroup?,
@@ -36,22 +37,9 @@ class LocalFragment : Fragment() {
 	override fun onDestroyView() {
 		super.onDestroyView()
 		tool.destroy()
+
 	}
 
-	/*	lifecycleScope.launch(Dispatchers.IO) {
-				val dp = DatagramPacket(byteArrayOf(), 0, 0)
-				val socket = DatagramSocket()
-				//socket.broadcast = true
-				var position = 1
-				while (position < 255) {
-					Log.e("position", "$position")
-					dp.address = InetAddress.getByName("192.168.123.$position")
-					socket.send(dp)
-					position++
-				}
-				Log.e("finish", "end")
-				socket.close()
-			}*/
 	@Composable
 	fun LocalScreen() {
 
